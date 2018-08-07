@@ -132,7 +132,7 @@ class WaypointUpdater(object):
         if self.stopline_wp_idx == -1 or (self.stopline_wp_idx >=farthest_index):
             result_waypoints = base_waypoints
         else:
-            rospy.logwarn("slow down")
+            ## rospy.logwarn("slow down")
             result_waypoints = self.decelerate_waypoints(base_waypoints,next_waypoint_index)
 
         lane = Lane()

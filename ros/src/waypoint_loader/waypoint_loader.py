@@ -29,7 +29,7 @@ class WaypointLoader(object):
     def new_waypoint_loader(self, path):
         if os.path.isfile(path):
             waypoints = self.load_waypoints(path)
-            rospy.logerr("load waypoints len: %d", len(waypoints))
+            rospy.loginfo("load waypoints len: %d", len(waypoints))
             self.publish(waypoints)
             rospy.loginfo('Waypoint Loded')
         else:
@@ -77,7 +77,7 @@ class WaypointLoader(object):
         lane.header.frame_id = '/world'
         lane.header.stamp = rospy.Time(0)
         lane.waypoints = waypoints
-        rospy.logerr("publish waypoints len: %d", len(waypoints))
+        rospy.loginfo("publish waypoints len: %d", len(waypoints))
         self.pub.publish(lane)
 
 
