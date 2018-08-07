@@ -2,6 +2,15 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
 
 Please use **one** of the two installation options, either native **or** docker installation.
 
+### Team Member
+|   Name                            |   Udacity account email            |
+|-----------------------------------|------------------------------------|
+| Yang Cheng                        | yangcheng830117@163.com            |
+I do the project independently.
+### Introduce
+I just finish all the parts of the porject follow the videos which are supported by Udacity.
+I use Opencv func:cv2.HoughCircles for simple traffic lights classifier, which is suggested in [slack](https://carnd.slack.com/messages/C6NVDVAQ3/convo/C6NVDVAQ3-1523340275.000218/)
+
 ### Native Installation
 
 * Be sure that your workstation is running Ubuntu 16.04 Xenial Xerus or Ubuntu 14.04 Trusty Tahir. [Ubuntu downloads can be found here](https://www.ubuntu.com/download/desktop).

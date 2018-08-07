@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46e97eeb-5677-4ba9-b290-664d7dcf613f" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ros/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ros/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ros/src/tl_detector/tl_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/ros/src/tl_detector/tl_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ros/src/waypoint_loader/waypoint_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ros/src/waypoint_loader/waypoint_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ros/src/waypoint_updater/waypoint_updater.py" beforeDir="false" afterPath="$PROJECT_DIR$/ros/src/waypoint_updater/waypoint_updater.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,11 +32,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="waypoint_loader.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="waypoint_loader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ros/src/waypoint_loader/waypoint_loader.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="302">
               <caret line="67" column="80" lean-forward="true" selection-start-line="67" selection-start-column="80" selection-end-line="67" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tl_classifier.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ros/src/tl_detector/light_classification/tl_classifier.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="665">
+              <caret line="35" column="34" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,6 +107,14 @@
               <item name="ros" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="tl_detector" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UdaCity_Car_Final" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UdaCity_Car_Final" type="462c0819:PsiDirectoryNode" />
+              <item name="ros" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tl_detector" type="462c0819:PsiDirectoryNode" />
+              <item name="light_classification" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UdaCity_Car_Final" type="b2602c69:ProjectViewProjectNode" />
@@ -185,6 +203,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
           <caret line="67" column="80" lean-forward="true" selection-start-line="67" selection-start-column="80" selection-end-line="67" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ros/src/tl_detector/light_classification/tl_classifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="35" column="34" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
