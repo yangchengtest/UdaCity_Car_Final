@@ -35,8 +35,12 @@ class TLClassifier(object):
         converted_img = cv2.addWeighted(red1, 1.0, red2, 1.0, 0.0)
 
         blur_img = cv2.GaussianBlur(converted_img,(15,15),0)
-        circles = cv2.HoughCircles(blur_img,cv2.HOUGH_GRADIENT,1,5, param1=100,param2=30,minRadius=10,maxRadius=150)
-
+        circles = None
+        try:
+            circles = cv2.HoughCircles(blur_img,cv2.HOUGH_GRADIENT,1,5, param1=100,param2=30,minRadius=10,maxRadius=150)
+        except AttributeError:
+            circles = cv2.HoughCircles(blur_img, cv2.cv.HOUGH_GRADIENT, 1, 5, param1=100, param2=30, minRadius=10,
+                                       maxRadius=150)
         if circles is not None:
             result = TrafficLight.RED
         rospy.loginfo("traffic lights %d", result)
