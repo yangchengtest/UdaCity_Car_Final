@@ -18,7 +18,7 @@ class Controller(object):
             max_steer_angle=cp.max_steer_angle)
         self.cp = cp
         self.pid = PID(kp=5, ki=0.5, kd=0.5, mn=cp.decel_limit, mx=cp.accel_limit)
-        self.vel_lpf = LowPassFilter(tau=0.5, ts=0.02)
+        #self.vel_lpf = LowPassFilter(tau=0.5, ts=0.02)
         self.s_lpf = LowPassFilter(tau=3, ts=1)
         self.t_lpf = LowPassFilter(tau=3, ts=1)
 
@@ -34,7 +34,7 @@ class Controller(object):
             self.reset()
             return 0, 0, 0
         else:
-            current_vel = self.vel_lpf.filt(current_vel)
+            #current_vel = self.vel_lpf.filt(current_vel)
             vel_err = linear_vel - current_vel
 
             steering = self.yaw_controller.get_steering(linear_vel, angular_vel, current_vel)

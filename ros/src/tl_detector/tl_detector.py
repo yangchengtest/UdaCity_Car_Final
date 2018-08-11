@@ -147,6 +147,7 @@ class TLDetector(object):
         line_wp_idx = None
         # List of positions that correspond to the line to stop in front of for a given intersection
         stop_line_positions = self.config['stop_line_positions']
+        ### rospy.loginfo("lights num: %d", len(self.lights))
         if self.pose and self.waypoints:
             car_position = self.get_closest_waypoint(self.pose.pose.position.x, self.pose.pose.position.y)
             diff = len(self.waypoints.waypoints)

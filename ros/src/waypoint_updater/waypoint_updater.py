@@ -24,7 +24,7 @@ TODO (for Yousuf and Aaron): Stopline location for each traffic light.
 
 LOOKAHEAD_WPS = 200 # Number of waypoints we will publish. You can change this number
 MAX_DECEL = 0.5
-
+TARGET_SPEED_MPH = 24
 class WaypointUpdater(object):
     def __init__(self):
         rospy.init_node('waypoint_updater')
@@ -69,7 +69,6 @@ class WaypointUpdater(object):
     def traffic_cb(self, msg):
         # TODO: Callback for /traffic_waypoint message. Implement
         self.stopline_wp_idx = msg.data
-        rospy.logwarn("traffic item: %d:", msg.data)
         if self.stopline_wp_idx > -1:
             self.publish()
 
@@ -131,6 +130,9 @@ class WaypointUpdater(object):
         base_waypoints = self.base_waypoints.waypoints[next_waypoint_index:farthest_index]
         if self.stopline_wp_idx == -1 or (self.stopline_wp_idx >=farthest_index):
             result_waypoints = base_waypoints
+            for i in range(len(result_waypoints) - 1):
+                # convert 10 miles per hour to meters per sec
+                result_waypoints[i].twist.twist.linear.x = (TARGET_SPEED_MPH * 1609.34) / (60 * 60)
         else:
             ## rospy.logwarn("slow down")
             result_waypoints = self.decelerate_waypoints(base_waypoints,next_waypoint_index)
