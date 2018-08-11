@@ -2,6 +2,7 @@ from styx_msgs.msg import TrafficLight
 import cv2
 import numpy as np
 import rospy
+from distutils.version import LooseVersion
 class TLClassifier(object):
     def __init__(self):
         #TODO load classifier
@@ -35,9 +36,8 @@ class TLClassifier(object):
         converted_img = cv2.addWeighted(red1, 1.0, red2, 1.0, 0.0)
 
         blur_img = cv2.GaussianBlur(converted_img,(15,15),0)
-        cv_version = cv2.__version__
         circles = None
-        if "3.3" in cv_version:
+        if  LooseVersion(cv2.__version__).version[0] == 3:
             circles = cv2.HoughCircles(blur_img,cv2.HOUGH_GRADIENT,1,5, param1=100,param2=30,minRadius=10,maxRadius=150)
         else:
             circles = cv2.HoughCircles(blur_img, cv2.cv.HOUGH_GRADIENT, 1, 5, param1=100, param2=30, minRadius=10,
