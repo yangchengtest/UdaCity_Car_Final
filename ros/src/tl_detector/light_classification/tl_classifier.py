@@ -35,10 +35,11 @@ class TLClassifier(object):
         converted_img = cv2.addWeighted(red1, 1.0, red2, 1.0, 0.0)
 
         blur_img = cv2.GaussianBlur(converted_img,(15,15),0)
+        cv_version = cv2.__version__
         circles = None
-        try:
+        if "3.3" in cv_version:
             circles = cv2.HoughCircles(blur_img,cv2.HOUGH_GRADIENT,1,5, param1=100,param2=30,minRadius=10,maxRadius=150)
-        except AttributeError:
+        else:
             circles = cv2.HoughCircles(blur_img, cv2.cv.HOUGH_GRADIENT, 1, 5, param1=100, param2=30, minRadius=10,
                                        maxRadius=150)
         if circles is not None:
