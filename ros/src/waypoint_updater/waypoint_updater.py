@@ -7,6 +7,7 @@ from scipy.spatial import KDTree
 import math
 import numpy as np
 from std_msgs.msg import Int32
+import yaml
 '''
 This node will publish waypoints from the car's current position to some `x` distance ahead.
 
@@ -25,6 +26,7 @@ TODO (for Yousuf and Aaron): Stopline location for each traffic light.
 LOOKAHEAD_WPS = 200 # Number of waypoints we will publish. You can change this number
 MAX_DECEL = 0.5
 TARGET_SPEED_MPH = 24
+TARGET_SPEED_MPH_SITE = 10
 class WaypointUpdater(object):
     def __init__(self):
         rospy.init_node('waypoint_updater')
@@ -43,6 +45,11 @@ class WaypointUpdater(object):
         self.waypoints_2d = None
         self.waypoints_tree = None
         self.stopline_wp_idx = -1
+        config_string = rospy.get_param("/traffic_light_config")
+        config = yaml.load(config_string)
+        self.speed = TARGET_SPEED_MPH_SITE
+        if not config['is_site']:
+            self.speed = TARGET_SPEED_MPH
         rospy.spin()
 
     def pose_cb(self, msg):
@@ -132,7 +139,7 @@ class WaypointUpdater(object):
             result_waypoints = base_waypoints
             for i in range(len(result_waypoints) - 1):
                 # convert 10 miles per hour to meters per sec
-                result_waypoints[i].twist.twist.linear.x = (TARGET_SPEED_MPH * 1609.34) / (60 * 60)
+                result_waypoints[i].twist.twist.linear.x = (self.speed * 1609.34) / (60 * 60)
         else:
             ## rospy.logwarn("slow down")
             result_waypoints = self.decelerate_waypoints(base_waypoints,next_waypoint_index)
