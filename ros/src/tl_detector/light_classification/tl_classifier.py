@@ -2,11 +2,49 @@ from styx_msgs.msg import TrafficLight
 import cv2
 import numpy as np
 import rospy
+import tensorflow as tf
+import os
+import yaml
 from distutils.version import LooseVersion
+
 class TLClassifier(object):
     def __init__(self):
-        #TODO load classifier
-        pass
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        config_string = rospy.get_param("/traffic_light_config")
+        config = yaml.load(config_string)
+        PATH_TO_FROZEN_GRAPH = None
+        if config['is_site']:
+            rospy.loginfo("is site")
+            PATH_TO_FROZEN_GRAPH = os.path.join(base_path, "model", "frozen_inference_graph_real.pb")
+        else:
+            PATH_TO_FROZEN_GRAPH = os.path.join(base_path, "model", "frozen_inference_graph.pb")
+        self.detection_graph = tf.Graph()
+        with self.detection_graph.as_default():
+            od_graph_def = tf.GraphDef()
+            with tf.gfile.GFile(PATH_TO_FROZEN_GRAPH, 'rb') as fid:
+                serialized_graph = fid.read()
+                od_graph_def.ParseFromString(serialized_graph)
+                tf.import_graph_def(od_graph_def, name='')
+            self.image_tensor = self.detection_graph.get_tensor_by_name('image_tensor:0')
+            self.d_boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0')
+            self.d_scores = self.detection_graph.get_tensor_by_name('detection_scores:0')
+            self.d_classes = self.detection_graph.get_tensor_by_name('detection_classes:0')
+            self.num_d = self.detection_graph.get_tensor_by_name('num_detections:0')
+        self.sess = tf.Session(graph=self.detection_graph)
+        self.threshold = .5
+
+    def get_classification_tf(self, img):
+        # Bounding Box Detection.
+        with self.detection_graph.as_default():
+            # Expand dimension since the model expects image to have shape [1, None, None, 3].
+            img_expanded = np.expand_dims(img, axis=0)
+            (boxes, scores, classes, num) = self.sess.run([self.d_boxes, self.d_scores, self.d_classes, self.num_d],
+                feed_dict={self.image_tensor: img_expanded})
+            boxes = np.squeeze(boxes)
+            scores = np.squeeze(scores)
+            classes = np.squeeze(classes)
+            num = np.squeeze(num)
+        return boxes,scores,classes,num
 
     def get_classification(self, image):
         """Determines the color of the traffic light in the image
@@ -20,31 +58,13 @@ class TLClassifier(object):
         """
         #TODO implement light color prediction
         result = TrafficLight.UNKNOWN
-        hsvimage = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-        ### rospy.loginfo("pic size: %d, %d",hsvimage.shape[0], hsvimage.shape[1])
-        #hsv red has 2 range
-        lower_red1 = np.array([0,43,46])
-        upper_red1 = np.array([10,255,255])
-        red1 = cv2.inRange(hsvimage, lower_red1 , upper_red1)
-
-
-        lower_red2 = np.array([156,43,46])
-        upper_red2 = np.array([180,255,255])
-        red2 = cv2.inRange(hsvimage, lower_red2 , upper_red2)
-
-        converted_img = cv2.addWeighted(red1, 1.0, red2, 1.0, 0.0)
-
-        blur_img = cv2.GaussianBlur(converted_img,(15,15),0)
-        circles = None
-###        rospy.loginfo("version info: %s", cv2.__version__)
-###        if  LooseVersion(cv2.__version__).version[0] == 3:
-        try:
-            circles = cv2.HoughCircles(blur_img, cv2.cv.HOUGH_GRADIENT, 1, 5, param1=100, param2=30, minRadius=10,maxRadius=150)
-        except AttributeError:
-            circles = cv2.HoughCircles(blur_img, cv2.HOUGH_GRADIENT, 1, 5, param1=100, param2=30, minRadius=10,
-                                       maxRadius=150)
-        if circles is not None:
-            result = TrafficLight.RED
+        boxes, scores, classes, num = self.get_classification_tf(image)
+        if scores[0] > self.threshold:
+            if classes[0] == 1:
+                result = TrafficLight.GREEN
+            elif classes[0] == 2:
+                result = TrafficLight.RED
+            elif classes[0] == 3:
+                pass
         rospy.loginfo("traffic lights %d", result)
         return result
