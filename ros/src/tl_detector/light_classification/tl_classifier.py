@@ -17,7 +17,7 @@ class TLClassifier(object):
             rospy.loginfo("is site")
             PATH_TO_FROZEN_GRAPH = os.path.join(base_path, "model", "frozen_inference_graph_real.pb")
         else:
-            PATH_TO_FROZEN_GRAPH = os.path.join(base_path, "model", "frozen_inference_graph.pb")
+            PATH_TO_FROZEN_GRAPH = os.path.join(base_path, "model", "frozen_inference_graph_sim.pb")
         self.detection_graph = tf.Graph()
         with self.detection_graph.as_default():
             od_graph_def = tf.GraphDef()
