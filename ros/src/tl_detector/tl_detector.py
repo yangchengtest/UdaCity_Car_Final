@@ -81,15 +81,7 @@ class TLDetector(object):
         """
         self.has_image = True
         self.camera_image = msg
-        currenttime = time.time()
-        rospy.loginfo("current time:%f", currenttime)
-        if currenttime-self.time < 0.25:
-            return
-        else:
-            self.time = currenttime
         light_wp, state = self.process_traffic_lights()
-        endtime = time.time()
-        rospy.loginfo("end time:%f", endtime)
         '''
         Publish upcoming red lights at camera frequency.
         Each predicted state has to occur `STATE_COUNT_THRESHOLD` number
@@ -155,9 +147,11 @@ class TLDetector(object):
         line_wp_idx = None
         # List of positions that correspond to the line to stop in front of for a given intersection
         stop_line_positions = self.config['stop_line_positions']
+        rospy.loginfo("start time:%f", time.time())
         ### rospy.loginfo("lights num: %d", len(self.lights))
         if self.pose and self.waypoints:
             car_position = self.get_closest_waypoint(self.pose.pose.position.x, self.pose.pose.position.y)
+            rospy.loginfo("getnearest time:%f", time.time())
             diff = len(self.waypoints.waypoints)
             for i, light in enumerate(self.lights):
                 line = stop_line_positions[i]
@@ -169,8 +163,10 @@ class TLDetector(object):
                     line_wp_idx = temp_wp_idx
 
         if closest_light:
+            rospy.loginfo("pic time start:%f", time.time())
             state = self.get_light_state(closest_light)
             #rospy.logwarn("light index: %d , light state: %s", line_wp_idx, state)
+            rospy.loginfo("pic time end:%f", time.time())
             return line_wp_idx, state
 
         return -1, TrafficLight.UNKNOWN

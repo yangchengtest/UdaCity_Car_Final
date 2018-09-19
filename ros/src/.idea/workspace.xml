@@ -14,8 +14,8 @@
       <file leaf-file-name="tl_classifier.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tl_detector/light_classification/tl_classifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="68" column="50" lean-forward="true" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="50" />
+            <state relative-caret-position="627">
+              <caret line="61" column="55" lean-forward="true" selection-start-line="61" selection-start-column="55" selection-end-line="61" selection-end-column="55" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -23,21 +23,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TrafficLight.msg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styx_msgs/msg/TrafficLight.msg">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file leaf-file-name="tl_detector.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tl_detector/tl_detector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="91" column="34" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+            <state relative-caret-position="281">
+              <caret line="83" column="31" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
               <folding>
                 <element signature="e#22#34#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="light_publisher.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tl_detector/light_publisher.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -50,8 +50,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tl_detector/light_classification/tl_classifier.py" />
         <option value="$PROJECT_DIR$/tl_detector/tl_detector.py" />
+        <option value="$PROJECT_DIR$/tl_detector/light_classification/tl_classifier.py" />
       </list>
     </option>
   </component>
@@ -202,23 +202,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tl_detector/light_publisher.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styx_msgs/msg/TrafficLight.msg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/tl_detector/light_classification/tl_classifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="68" column="50" lean-forward="true" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="50" />
+        <state relative-caret-position="627">
+          <caret line="61" column="55" lean-forward="true" selection-start-line="61" selection-start-column="55" selection-end-line="61" selection-end-column="55" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styx_msgs/msg/TrafficLight.msg">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/tl_detector/tl_detector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="91" column="34" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+        <state relative-caret-position="281">
+          <caret line="83" column="31" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
           <folding>
             <element signature="e#22#34#0" expanded="true" />
           </folding>

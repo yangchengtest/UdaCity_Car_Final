@@ -6,6 +6,7 @@ import tensorflow as tf
 import os
 import yaml
 from distutils.version import LooseVersion
+import time
 
 class TLClassifier(object):
     def __init__(self):
@@ -58,7 +59,9 @@ class TLClassifier(object):
         """
         #TODO implement light color prediction
         result = TrafficLight.UNKNOWN
+        rospy.loginfo("pic time start:%f", time.time())
         boxes, scores, classes, num = self.get_classification_tf(image)
+        rospy.loginfo("pic time end:%f", time.time())
         if scores[0] > self.threshold:
             if classes[0] == 1:
                 result = TrafficLight.GREEN
