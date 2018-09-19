@@ -11,6 +11,7 @@ import tf
 import cv2
 import yaml
 from scipy.spatial import KDTree
+import time
 
 STATE_COUNT_THRESHOLD = 3
 
@@ -51,7 +52,7 @@ class TLDetector(object):
         self.last_state = TrafficLight.UNKNOWN
         self.last_wp = -1
         self.state_count = 0
-
+        self.time = 0.0
         rospy.spin()
 
     def pose_cb(self, msg):
@@ -80,8 +81,15 @@ class TLDetector(object):
         """
         self.has_image = True
         self.camera_image = msg
+        currenttime = time.time()
+        rospy.loginfo("current time:%f", currenttime)
+        if currenttime-self.time < 0.25:
+            return
+        else:
+            self.time = currenttime
         light_wp, state = self.process_traffic_lights()
-
+        endtime = time.time()
+        rospy.loginfo("end time:%f", endtime)
         '''
         Publish upcoming red lights at camera frequency.
         Each predicted state has to occur `STATE_COUNT_THRESHOLD` number
